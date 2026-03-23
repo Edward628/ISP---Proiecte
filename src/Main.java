@@ -3,6 +3,7 @@
 void main() {
     List<Student> lista = new ArrayList<>();
 
+    // CITIRE
     try {
         Scanner sc = new Scanner(new File("src/studenti_in.txt"));
 
@@ -10,10 +11,10 @@ void main() {
             String[] p = sc.nextLine().split(",");
 
             lista.add(new Student(
-                    Integer.parseInt(p[0]), // 1024 → int
-                    p[1],                   // Ioan
-                    p[2],                   // Mihalcea
-                    p[3]                    // ISM141/1
+                    Integer.parseInt(p[0]),
+                    p[1],
+                    p[2],
+                    p[3]
             ));
         }
 
@@ -23,18 +24,23 @@ void main() {
         e.printStackTrace();
     }
 
-    // afisare
-    System.out.println("Studentii cititi:");
-    for (Student s : lista) {
-        System.out.println(s);
-    }
+    // SORTARE dupa formatie, apoi nume (fara lambda, fara override)
+    lista.sort(new Comparator<Student>() {
+        public int compare(Student a, Student b) {
 
-    // sortare dupa nume
-    lista.sort((a, b) -> a.nume.compareToIgnoreCase(b.nume));
+            int rezultat = a.formatieDeStudiu.compareToIgnoreCase(b.formatieDeStudiu);
 
-    // scriere
+            if (rezultat == 0) {
+                return a.nume.compareToIgnoreCase(b.nume);
+            }
+
+            return rezultat;
+        }
+    });
+
+    // SCRIERE
     try {
-        PrintWriter pw = new PrintWriter("src/studenti_out.txt");
+        PrintWriter pw = new PrintWriter("src/studenti_out_sorted.txt");
 
         for (Student s : lista) {
             pw.println(s);
