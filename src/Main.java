@@ -73,7 +73,6 @@ public class Main {
         System.out.println("Nota Ioan Popescu: " + notaN);
 
 
-
     }
 }
 
