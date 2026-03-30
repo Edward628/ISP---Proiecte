@@ -1,56 +1,80 @@
+import java.io.*;
+import java.util.*;
 
-
-void main() {
-    List<Student> lista = new ArrayList<>();
-
-    // CITIRE
-    try {
-        Scanner sc = new Scanner(new File("src/studenti_in.txt"));
-
-        while (sc.hasNextLine()) {
-            String[] p = sc.nextLine().split(",");
-
-            lista.add(new Student(
-                    Integer.parseInt(p[0]),
-                    p[1],
-                    p[2],
-                    p[3]
-            ));
+public class Main {
+    public static float gasesteNota(String prenume, String nume, Map<String, Student> studenti) {
+        Student s = studenti.get(prenume + "|" + nume);
+        if (s != null) {
+            return (float) s.nota;
+        } else {
+            return 0.0f;
         }
-
-        sc.close();
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
+    public static void main(String[] args) {
 
-    // SORTARE dupa formatie, apoi nume (fara lambda, fara override)
-    lista.sort(new Comparator<Student>() {
-        public int compare(Student a, Student b) {
+        Map<Integer, Student> map = new HashMap<>();
 
-            int rezultat = a.formatieDeStudiu.compareToIgnoreCase(b.formatieDeStudiu);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/studenti.txt"));
+            String linie;
 
-            if (rezultat == 0) {
-                return a.nume.compareToIgnoreCase(b.nume);
+
+            while ((linie = br.readLine()) != null) {
+                String[] v = linie.split(",");
+
+                int nr = Integer.parseInt(v[0]);
+                Student s = new Student(nr, v[1], v[2], v[3]);
+
+                map.put(nr, s);
+            }
+            br.close();
+
+
+            BufferedReader br2 = new BufferedReader(new FileReader("src/note_anon.txt"));
+
+            while ((linie = br2.readLine()) != null) {
+                String[] v = linie.split(",");
+
+                int nr = Integer.parseInt(v[0]);
+                double nota = Double.parseDouble(v[1]);
+
+                if (map.containsKey(nr)) {
+                    map.get(nr).setNota(nota);
+                }
+            }
+            br2.close();
+
+
+            for (Student s : map.values()) {
+                System.out.println(s);
             }
 
-            return rezultat;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    });
+        System.out.println();
+        Map<String, Student> tineri = new HashMap<>();
 
-    // SCRIERE
-    try {
-        PrintWriter pw = new PrintWriter("src/studenti_out_sorted.txt");
+        // Adăugăm câțiva studenți cu note
+        Student bianca = new Student(1029, "Bianca", "Popescu", "TI131/1");
+        bianca.setNota(9.1);
+        Student ioan = new Student(1030, "Ioan", "Popa", "ISM141/2");
+        ioan.setNota(8.5);
 
-        for (Student s : lista) {
-            pw.println(s);
-        }
+        // cheia map: "prenume|nume"
+        tineri.put(bianca.prenume + "|" + bianca.nume, bianca);
+        tineri.put(ioan.prenume + "|" + ioan.nume, ioan);
 
-        pw.close();
+        // Apelăm metoda statica gasesteNota
+        float notaM = gasesteNota("Bianca", "Popescu", tineri);
+        float notaN = gasesteNota("Ioan", "Popescu", tineri); // student inexistent
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println("Nota Bianca Popescu: " + notaM);
+        System.out.println("Nota Ioan Popescu: " + notaN);
+
+
+
     }
+}
 
-    System.out.println("Gata!");
- }
+
