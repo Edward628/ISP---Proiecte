@@ -2,10 +2,10 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static float gasesteNota(String prenume, String nume, Map<String, Student> studenti) {
+    public static double gasesteNota(String prenume, String nume, Map<String, Student> studenti) {
         Student s = studenti.get(prenume + "|" + nume);
         if (s != null) {
-            return (float) s.nota;
+            return  s.nota;
         } else {
             return 0.0f;
         }
@@ -66,8 +66,8 @@ public class Main {
         tineri.put(ioan.prenume + "|" + ioan.nume, ioan);
 
         // Apelăm metoda statica gasesteNota
-        float notaM = gasesteNota("Bianca", "Popescu", tineri);
-        float notaN = gasesteNota("Ioan", "Popescu", tineri); // student inexistent
+        double notaM = gasesteNota("Bianca", "Popescu", tineri);
+        double notaN = gasesteNota("Ioan", "Popescu", tineri); // student inexistent
 
         System.out.println("Nota Bianca Popescu: " + notaM);
         System.out.println("Nota Ioan Popescu: " + notaN);
