@@ -1,6 +1,7 @@
 package Laborator5.Advanced;
 
 public abstract class ACalculator {
+    // utlizam clasa Objerct
     protected Object state;
 
     public Object result() {
