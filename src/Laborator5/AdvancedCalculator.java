@@ -2,12 +2,12 @@ package Laborator5;
 
 public class AdvancedCalculator extends IntCalculator {
     public AdvancedCalculator(int initialValue) {
-        super(initialValue); // apel constructor parinte
+        super(initialValue);
     }
     @Override
     public AdvancedCalculator add(int value) {
-        super.add(value); // folosește logica din IntCalculator
-        return this;      // dar returnează AdvancedCalculator
+        super.add(value);
+        return this;
     }
 
     @Override
