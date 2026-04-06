@@ -52,7 +52,10 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
         System.out.println();
+
         Map<String, Student> tineri = new HashMap<>();
 
         // Adăugăm câțiva studenți cu note
@@ -67,7 +70,7 @@ public class Main {
 
         // Apelăm metoda statica gasesteNota
         double notaM = gasesteNota("Bianca", "Popescu", tineri);
-        double notaN = gasesteNota("Ioan", "Popescu", tineri); // student inexistent
+        double notaN = gasesteNota("Ioan", "Popa", tineri); // student inexistent
 
         System.out.println("Nota Bianca Popescu: " + notaM);
         System.out.println("Nota Ioan Popescu: " + notaN);

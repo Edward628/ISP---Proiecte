@@ -52,6 +52,8 @@ public class Student {
         return false;
     }
     public String getCheie() {
+
         return prenume + "|" + nume + "|" + formatieDeStudiu;
+
     }
 }
