@@ -1,0 +1,4 @@
+NrMatricol: 1025 | Prenume: Andrei | Nume: Popa | Grupa: ISM141/2 | Nota: 8.7 | CuantumBursa: 725.5
+NrMatricol: 1024 | Prenume: Ioan | Nume: Mihalcea | Grupa: ISM141/1 | Nota: 9.8 | CuantumBursa: 801.1
+NrMatricol: 1026 | Prenume: Anamaria | Nume: Prodan | Grupa: TI131/1 | Nota: 8.9 | CuantumBursa: 745.5
+NrMatricol: 1029 | Prenume: Bianca | Nume: Popescu | Grupa: TI131/1 | Nota: 9.1 | CuantumBursa: 780.8
