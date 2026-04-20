@@ -23,7 +23,6 @@ public class StudentBursier extends Student {
         return Objects.hash(super.hashCode(), cuantumBursa);
     }
 
-    // toString
     public String toString() {
         return super.toString() + " | CuantumBursa: " + cuantumBursa;
     }
