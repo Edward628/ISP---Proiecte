@@ -20,5 +20,7 @@ public class TestAplicatieCuBursa {
         } else {
             System.out.println("TEST ESUAT: Testul se aștepta la 'Mihalcea', dar a găsit pe altcineva.");
         }
+
     }
+
 }
