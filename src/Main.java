@@ -14,12 +14,12 @@ public class Main {
         System.out.println("--- Lista initiala ---");
         studenti.forEach(System.out::println);
 
-        // Apelăm metoda de împărțire
+
         System.out.println("\n--- Dupa impartirea in 2 formatii ---");
         imparteSiAfiseaza(studenti);
     }
 
-    // AICI ESTE METODA DE ÎMPĂRȚIRE (în interiorul clasei Main)
+
     public static void imparteSiAfiseaza(List<Student> lista) {
         int dimensiuneGrupa1 = (lista.size() + 1) / 2;
 
