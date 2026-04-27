@@ -1,30 +1,30 @@
 import java.util.Objects;
 
-public class StudentBursier extends Student {
-    double cuantumBursa;
 
-    public StudentBursier(int numarMatricol, String prenume, String nume,
-                          String formatieDeStudiu, double nota, double cuantumBursa) {
-        super(numarMatricol, prenume, nume, formatieDeStudiu);
-        this.nota = nota;
-        this.cuantumBursa = cuantumBursa;
+public  class StudentBursier extends Student {
+
+
+    private final double bursa;
+
+
+    public StudentBursier(int numarMatricol, String prenume, String nume, String formatieDeStudiu, double nota, double bursa) {
+
+        super(numarMatricol, prenume, nume, formatieDeStudiu, nota);
+        this.bursa = bursa;
+    }
+
+    public double getBursa() {
+        return bursa;
     }
 
 
-    public boolean equals(Object o) {
-        if (!super.equals(o)) return false;
-        if (getClass() != o.getClass()) return false;
-        StudentBursier that = (StudentBursier) o;
-        return Double.compare(that.cuantumBursa, cuantumBursa) == 0;
+    public StudentBursier withBursa(double bursaNoua) {
+        return new StudentBursier(getNumarMatricol(), getPrenume(), getNume(), getFormatieDeStudiu(), getNota(), bursaNoua);
     }
 
-
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), cuantumBursa);
-    }
-
+    // Optional: Override la toString pentru a afișa și bursa
+    @Override
     public String toString() {
-        return super.toString() + " | CuantumBursa: " + cuantumBursa;
+        return super.toString() + " | Bursa: " + bursa;
     }
-
 }

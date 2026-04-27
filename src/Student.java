@@ -4,23 +4,51 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
-public class Student {
-    int numarMatricol;
-    String prenume;
-    String nume;
-    String formatieDeStudiu;
-    double nota;
+public  class Student {
+    private final int numarMatricol;
+    private final String prenume;
+    private final String nume;
+    private final String formatieDeStudiu;
+    private final double nota;
 
-    Student(int x, String s, String t, String m) {
-        numarMatricol = x;
-        prenume = s;
-        nume = t;
-        formatieDeStudiu = m;
-    }
-    public void setNota(double nota)
-    { this.nota = nota;
 
+    public Student(int numarMatricol, String prenume, String nume, String formatieDeStudiu, double nota) {
+        this.numarMatricol = numarMatricol;
+        this.prenume = prenume;
+        this.nume = nume;
+        this.formatieDeStudiu = formatieDeStudiu;
+        this.nota = nota;
     }
+
+    public Student withFormatieDeStudiu(String nouaFormatie) {
+        return new Student(this.numarMatricol, this.prenume, this.nume, nouaFormatie, this.nota);
+    }
+
+    public int getNumarMatricol() { return numarMatricol; }
+    public String getPrenume() { return prenume; }
+    public String getNume() { return nume; }
+    public String getFormatieDeStudiu() { return formatieDeStudiu; }
+    public double getNota() { return nota; }
+
+    public String getCheie() {
+        return prenume + "|" + nume + "|" + formatieDeStudiu;
+    }
+
+    public static boolean existaStudent(List<Student> lista, Student s) {
+        for (Student st : lista) {
+
+            if (st.getPrenume().equals(s.getPrenume()) &&
+                    st.getNume().equals(s.getNume()) &&
+                    st.getFormatieDeStudiu().equals(s.getFormatieDeStudiu())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -28,32 +56,17 @@ public class Student {
         return numarMatricol == student.numarMatricol;
     }
 
-
+    @Override
     public int hashCode() {
         return Objects.hash(numarMatricol);
     }
 
-
+    @Override
     public String toString() {
         return "NrMatricol: " + numarMatricol +
                 " | Prenume: " + prenume +
                 " | Nume: " + nume +
                 " | Grupa: " + formatieDeStudiu +
                 " | Nota: " + nota;
-    }
-    public static boolean existaStudent(List<Student> lista, Student s) {
-        for (Student st : lista) {
-            if (st.prenume.equals(s.prenume) &&
-                    st.nume.equals(s.nume) &&
-                    st.formatieDeStudiu.equals(s.formatieDeStudiu)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public String getCheie() {
-
-        return prenume + "|" + nume + "|" + formatieDeStudiu;
-
     }
 }
