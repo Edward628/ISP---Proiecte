@@ -1,36 +1,53 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
+import java.util.stream.*;
 
 public class Main {
     public static void main(String[] args) {
-        // 1. Creăm lista de studenți (imutabili)
-        List<Student> studenti = new ArrayList<>();
-        studenti.add(new Student(1, "Popescu", "Ion", "Grupa101", 9.5));
-        studenti.add(new Student(2, "Ionescu", "Ana", "Grupa101", 10.0));
-        studenti.add(new Student(3, "Marin", "Vasile", "Grupa101", 8.0));
-        studenti.add(new Student(4, "Radu", "Elena", "Grupa101", 9.0));
-        studenti.add(new Student(5, "Dinu", "Dan", "Grupa101", 7.5));
+        List<Student> studentiCuNote = Arrays.asList(
+                new Student(1025, "Andrei",   "Popa",      "ISM141/2",  8.70),
+                new Student(1024, "Ioan",     "Mihalcea",  "ISM141/1",  10),
+                new Student(1026, "Anamaria", "Prodan",    "TI131/1",   8.90),
+                new Student(1029, "Bianca",   "Popescu",   "TI131/1",   10),
+                new Student(1029, "Maria",    "Pana",      "TI131/2",   4.10),
+                new Student(1029, "Gabriela", "Mohanu",    "TI131/2",   7.33),
+                new Student(1029, "Marius",   "Nasta",     "TI131/2",   3.20),
+                new Student(1029, "Marius",   "Nasta",     "TI131/1",   5.12),
+                new Student(1029, "Andrei",   "Dobrescu",  "TI131/2",   2.22)
+        );
 
-        System.out.println("--- Lista initiala ---");
-        studenti.forEach(System.out::println);
+        // a) Studenți cu nota 10
+        System.out.println("=== a) Nota 10 ===");
+        studentiCuNote.stream()
+                .filter(s -> s.getNota() == 10)
+                .forEach(System.out::println);
 
+        // b) Studenți cu nota sub 5
+        System.out.println("=== b) Nota sub 5 ===");
+        studentiCuNote.stream()
+                .filter(s -> s.getNota() < 5)
+                .forEach(System.out::println);
 
-        System.out.println("\n--- Dupa impartirea in 2 formatii ---");
-        imparteSiAfiseaza(studenti);
-    }
+        // c) Nota < 4 devine 4
+        System.out.println("=== c) Lista corectată ===");
+        List<Student> listaCorectata = studentiCuNote.stream()
+                .map(s -> s.getNota() < 4
+                        ? new Student(s.getNumarMatricol(), s.getPrenume(),
+                        s.getNume(), s.getFormatieDeStudiu(), 4.0)
+                        : s)
+                .collect(Collectors.toList());
+        listaCorectata.forEach(System.out::println);
 
+        // d) Suma notelor
+        double suma = studentiCuNote.stream()
+                .mapToDouble(Student::getNota)
+                .reduce(0.0, Double::sum);
+        System.out.println("=== d) Suma: " + suma);
 
-    public static void imparteSiAfiseaza(List<Student> lista) {
-        int dimensiuneGrupa1 = (lista.size() + 1) / 2;
-
-        List<Student> grupa1 = lista.subList(0, dimensiuneGrupa1);
-        List<Student> grupa2 = lista.subList(dimensiuneGrupa1, lista.size());
-
-        System.out.println("Formatia 1 (" + grupa1.size() + " studenti):");
-        grupa1.forEach(s -> System.out.println("  " + s));
-
-        System.out.println("Formatia 2 (" + grupa2.size() + " studenti):");
-        grupa2.forEach(s -> System.out.println("  " + s));
+        // e) Media notelor
+        double media = suma / studentiCuNote.size();
+        System.out.println("=== e) Media: " + media);
     }
 }
 
