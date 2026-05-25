@@ -11,10 +11,19 @@ public class StudentiinFisierTxt implements ExportStrategy {
     @Override
     public void executa(List<Student> studenti) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(numeFisier))) {
-            for (Student s : studenti) {
+            /*for (Student s : studenti) {
                 writer.write(s.toString());
                 writer.newLine();
-            }
+            }*/
+            studenti.stream().forEach(student->{
+               try {
+                   writer.write(student + "\n");
+                   writer.newLine();
+               }
+               catch(IOException e){
+
+               }
+            });
             // Afiseaza calea EXACTA unde s-a creat fisierul
             System.out.println("Exportat in: " + new java.io.File(numeFisier).getAbsolutePath());
         } catch (IOException e) {

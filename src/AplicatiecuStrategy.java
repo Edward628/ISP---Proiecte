@@ -17,24 +17,29 @@ public class AplicatiecuStrategy {
         );
         ExportStrategy strategie;
 
-        // a) Afisare in consola
-        strategie = new Studentiinconsola();
+
+        // a) Consola cu timer
+        strategie = new TimerDecorator(new Studentiinconsola());
         strategie.executa(studenti);
         System.out.println();
-        // b) Export in txt
-        strategie = new StudentiinFisierTxt("studenti.txt");
+
+        // b) Export in txt cu timer
+        strategie = new TimerDecorator(new StudentiinFisierTxt("studenti.txt"));
         strategie.executa(studenti);
         System.out.println();
-        // c) Export in xlsx
-        strategie = new StudentiInFisierXlsx("studenti.xlsx");
+
+        // c) Export in xlsx cu timer
+        strategie = new TimerDecorator(new StudentiInFisierXlsx("studenti.xlsx"));
         strategie.executa(studenti);
         System.out.println();
-        // d) Citire din txt
-        strategie = new StudentiDinFisierText("studenti.txt");
+
+        // d) Citire din txt cu timer
+        strategie = new TimerDecorator(new StudentiDinFisierText("studenti.txt"));
         strategie.executa(studenti);
         System.out.println();
-        // e) Citire din xlsx
-        strategie = new StudentiDinFisierXlsx("studenti.xlsx");
+
+        // e) Citire din xlsx cu timer
+        strategie = new TimerDecorator(new StudentiDinFisierXlsx("studenti.xlsx"));
         strategie.executa(studenti);
 
     }
